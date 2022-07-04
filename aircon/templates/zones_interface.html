@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block header %}
+
+<style>
+.custom-control-input {
+  transform: scale(2.5);
+  margin-left: 40px;
+  margin-top: 10px;
+  }
+</style>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+   function noop(){};
+
+   function togglePower(tasmota_id){
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 3 && this.status ==200) {
+        noop()
+      }
+    };
+    xhttp.open("GET",'toggle_power/'.concat(tasmota_id));
+    xhttp.send();
+
+    new_toggle_state = document.getElementById('toggle_'.concat(tasmota_id)).checked
+    console.log(new_toggle_state)
+    // if we turned the outlet off, apply a lock and keep it off. If we toggle
+    // back on, return control to the state machine and remove the lock
+    if (new_toggle_state == false){
+      manual_lock_value = '/ON'
+    } else {
+      manual_lock_value = '/OFF'
+    }
+    
+    var xhttp = new XMLHttpRequest(); xhttp.onreadystatechange = function() {
+      if (this.readyState == 3 && this.status ==200) {
+        noop()
+      }
+    };
+    xhttp.open("GET",'manual_lock/'.concat(tasmota_id).concat(manual_lock_value));
+    xhttp.send();
+   };
+
+   function incrementTemp(zone_name, op, tasmota_id){
+      if(op == "plus"){
+        add_value = 1;
+      } else if(op == "minus"){
+        add_value = -1;
+      }
+      
+      var temperature_val = document.getElementById(zone_name.concat("$target_temp")).innerHTML;
+      var adjusted_val = parseInt(temperature_val) + add_value;
+      document.getElementById(zone_name.concat("$target_temp")).innerHTML = adjusted_val;
+
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 3 && this.status ==200) {
+          noop()
+        }
+      };
+      xhttp.open("GET",'set_zone_target_temp/'.concat(zone_name).concat('/').concat(adjusted_val));
+      xhttp.send();
+
+      var xhttp = new XMLHttpRequest(); xhttp.onreadystatechange = function() {
+        if (this.readyState == 3 && this.status ==200) {
+          noop()
+        }
+      };
+      xhttp.open("GET",'manual_lock/'.concat(tasmota_id).concat('/OFF'));
+      xhttp.send();
+   };
+</script>
+  <h1>{% block title %}
+Register{% endblock %}</h1>
+{% endblock %}
+
+<div class="container-fluid">
+{% block content %} 
+{% for zone in states %}
+
+  <div class="row">
+      <div class="col-sm-12"><p class="h2">{{ zone.name }}</p></div>
+  </div>
+  <div class="row gap-1">
+
+
+      <div class="col-3">
+          <button type="button" onclick=incrementTemp('{{ zone.zone_name }}','minus','{{ zone.power_state_name }}') class="btn btn-primary w-100">
+          <b><<</b>
+          </button>
+      </div>
+      <div class="col-1">
+      <!-- <div class="col-1 d-flex justify-content-center">  -->
+          <div class="d-flex justify-content-center">
+              <p class="h2" id = "{{ zone.zone_name }}$target_temp">{{ zone.target_temp }}</p>
+          </div>
+      </div>                
+      <div class="col-3">
+          <button type="button" onclick=incrementTemp('{{ zone.zone_name }}','plus','{{ zone.power_state_name }}') class="btn btn-primary w-100"><b>>></b></button>
+      </div>
+      <div class="col-2">
+          <div class="form-check form-switch custom-control-input">
+            <!--autocomplete=off keeps the toggle from sticking on reload-->
+              <input class="form-check-input" type="checkbox" role="switch" autocomplete="off" id="toggle_{{ zone.power_state_name }}" onclick=togglePower('{{ zone.power_state_name }}') {{ zone.power_state }}>
+              <label class="form-check-label" for="toggle_{{ zone.power_state_name }}"></label>
+          </div>
+      </div>
+  </div>
+  <div class="row">
+    <div class="col3">
+      <p class="mb-1"> Current Temp: {{ zone.current_temp}}</p>
+      <p class="mb-1"> Humidity: {{ zone.humidity }}</p>
+      <p class="mb-1"> Last update: {{ zone.last_update }}</p>
+    </div>
+  </div>  
+{% endfor %}
+{% endblock %}
+</div>

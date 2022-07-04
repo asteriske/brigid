@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Register{% endblock %}</h1>
+{% endblock %}
+
+{% block content %} 
+<!--<p>{{ mqtt_state }}</p>-->
+
+{% for item in mqtt_state.items() %}
+{% for subitem in item %}
+<p>{{ subitem }}</p><br>
+{% endfor %}
+<br>
+{% endfor %}
+
+<p>{{ zones }}</p>
+
+<p>{{ manual_locks }}</p>
+{% endblock %}
