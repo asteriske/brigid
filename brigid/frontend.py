@@ -1,9 +1,11 @@
-from flask import Blueprint, current_app, render_template, make_response
 import datetime
-from brigid.templates import *
-from brigid import mqtt
 from dataclasses import dataclass, field
 from typing import List
+
+from flask import Blueprint, current_app, make_response, render_template
+
+from brigid import mqtt
+from brigid.templates import *
 
 bp = Blueprint('control', __name__)
 

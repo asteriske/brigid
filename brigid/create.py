@@ -1,8 +1,10 @@
-from flask import Flask
-from brigid import frontend, mqtt, service
-from threading import Thread
-from collections import defaultdict
 import logging
+from collections import defaultdict
+from threading import Thread
+
+from flask import Flask
+
+from brigid import frontend, mqtt, service
 
 logger = logging.getLogger(__name__)
 
