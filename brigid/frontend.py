@@ -1,7 +1,7 @@
 from flask import Blueprint, current_app, render_template, make_response
 import datetime
-from aircon.templates import *
-from aircon import mqtt
+from brigid.templates import *
+from brigid import mqtt
 from dataclasses import dataclass, field
 from typing import List
 

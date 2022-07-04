@@ -3,7 +3,7 @@ import datetime
 from typing import Dict
 from enum import IntEnum
 from collections import defaultdict
-from aircon import mqtt
+from brigid import mqtt
 
 # Defines groups of devices by their value_names
 zones = {

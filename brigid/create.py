@@ -1,5 +1,5 @@
 from flask import Flask
-from aircon import frontend, mqtt, service
+from brigid import frontend, mqtt, service
 from threading import Thread
 from collections import defaultdict
 import logging
@@ -14,13 +14,12 @@ def create_app():
     app.zones = service.zones
     app.manual_locks = defaultdict(lambda: "OFF")
 
-    # topic_thread = Thread(target=mqtt.poll_topics, args=(app.mqtt_state,),daemon=True)
     topic_thread = Thread(target=mqtt.poll_topics, args=(app,),daemon=True)
     topic_thread.start()
-    logger.info('Topic thread started.')
+    app.logger.info('Topic thread started.')
 
     state_machine_thread = Thread(target=service.state_machine, args=(app,), daemon=True)
     state_machine_thread.start()
-    logger.info('State machine thread started.')
+    app.logger.info('State machine thread started.')
 
     return app

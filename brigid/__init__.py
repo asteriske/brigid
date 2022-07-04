@@ -1,4 +1,4 @@
-from aircon import create
+from brigid import create
 import logging
 
 

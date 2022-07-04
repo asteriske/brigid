@@ -13,11 +13,11 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-RUN groupadd -g 1000 aircon_grp && \
-    useradd -r -u 1000 -g aircon_grp aircon_user && \
-    chown -R aircon_user /app 
+RUN groupadd -g 1000 brigid_grp && \
+    useradd -r -u 1000 -g brigid_grp brigid_user && \
+    chown -R brigid_user /app 
 
-USER aircon_user
+USER brigid_user
 
 ENV PYTHONUNBUFFERED TRUE
 
