@@ -1,6 +1,7 @@
 import datetime
 import json
 import logging
+import os
 import re
 import time
 from dataclasses import dataclass, field
@@ -13,8 +14,8 @@ logger = logging.getLogger(__name__)
 
 TOPICS = "outlet/#,zigbee2mqtt/sensors/#"
 MQTT_CLIENT_ID = "brigid"
-MQTT_BROKER_ADDR = "mqtt.lan"
-MQTT_BROKER_PORT = 1883
+MQTT_BROKER_ADDR = os.environ['MQTT_BROKER_ADDR']#"mqtt.lan"
+MQTT_BROKER_PORT = int(os.environ['MQTT_BROKER_PORT'])#1883
 
 
 class NoMatchingTopicException(Exception):
