@@ -7,7 +7,7 @@
             "tasmota_power_bool": [
                 "tasmota_of"
             ],
-            "name": "Office",
+            "name": "Office_",
             "default_temp": 78,
             "floor_temp": 72,
             "target_temp": 78
@@ -19,7 +19,7 @@
             "tasmota_power_bool": [
                 "tasmota_br"
             ],
-            "name": "Bedroom",
+            "name": "Bedroom_",
             "default_temp": 78,
             "floor_temp": 72,
             "target_temp": 78
@@ -31,7 +31,7 @@
             "tasmota_power_bool": [
                 "tasmota_lr"
             ],
-            "name": "Livingroom",
+            "name": "Livingroom_",
             "default_temp": 78,
             "floor_temp": 72,
             "target_temp": 78
