@@ -249,7 +249,7 @@ def poll_topics(app):
     mqtt_state["client"] = mqtt.Client(MQTT_CLIENT_ID, clean_session=True)
     mqtt_state["client"].connect(host=MQTT_BROKER_ADDR, port=MQTT_BROKER_PORT)
 
-    for topic in TOPICS.split(","):
+    for topic in app.topics:
         mqtt_state["client"].subscribe(topic)
 
     mqtt_state["client"].on_message = on_message_factory(app)

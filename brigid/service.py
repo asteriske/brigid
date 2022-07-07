@@ -6,35 +6,6 @@ from typing import Dict
 
 from brigid import mqtt
 
-# Defines groups of devices by their value_names
-zones = {
-    "office": {
-        "temp_sensor": ["temp_Office"],
-        "tasmota_power_bool": ["tasmota_of"],
-        "name": "Office",
-        "default_temp": 78,
-        "floor_temp": 72,
-        "target_temp": 78,
-    },
-    "bedroom": {
-        "temp_sensor": ["temp_Bedroom"],
-        "tasmota_power_bool": ["tasmota_br"],
-        "name": "Bedroom",
-        "default_temp": 78,
-        "floor_temp": 72,
-        "target_temp": 78,
-    },
-    "livingroom": {
-        "temp_sensor": ["temp_LivingRoom"],
-        "tasmota_power_bool": ["tasmota_lr"],
-        "name": "Livingroom",
-        "default_temp": 78,
-        "floor_temp": 72,
-        "target_temp": 78,
-    },
-}
-
-
 class OutletState(IntEnum):
     TOO_COLD = 1
     IN_RANGE = 2

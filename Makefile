@@ -1,5 +1,5 @@
 build:
-	docker build -t registry.lan:5000/brigid:latest .
+	docker build -t registry.lan:5000/brigid/brigid:v0.93 .
 
 push:
-	docker image push registry.lan:5000/brigid:latest
+	docker push registry.lan:5000/brigid/brigid:v0.93
