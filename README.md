@@ -40,3 +40,7 @@ Other things I use in my deployment include:
 ## Didn't you know Home Assistant is better at this?
 
 Yes! That being said, the point of self-hosted projects like Home Assistant is to be in control of everything top-to-bottom and what better way to do that than to write our own?
+
+## Brigid?
+
+MQTT bridges sensors to outlets to make things cold. Bridge + frigid = Brigid.
