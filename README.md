@@ -31,7 +31,7 @@ In this repo I use
 
 Other things I use in my deployment include:
 * [Nomad](https://www.nomadproject.io/) for container orchestration
-* [ConBee II](https://phoscon.de/en/conbee to read Zigbee messages
+* [ConBee II](https://phoscon.de/en/conbee) to read Zigbee messages
 * [Zigbee2MQTT](https://www.zigbee2mqtt.io/) to parse Zigbee messages into MQTT
 * [Eclipse Mosquitto](https://mosquitto.org/) MQTT broker
 * [Athom Tasmota US Plug V2](https://www.athom.tech/blank-1/tasmota-us-plug-v2) smart plugs
