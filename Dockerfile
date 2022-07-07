@@ -7,7 +7,7 @@ COPY requirements.txt .
 RUN apt-get update && \
     apt-get upgrade -y && \
      apt-get install build-essential -y && \
-     apt-get install gcc gfortran python3-dev libffi-dev dnsutils net-tools netcat -y
+     apt-get install gcc gfortran python3-dev libffi-dev -y
 
 RUN pip install -r requirements.txt
 
